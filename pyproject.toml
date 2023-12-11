@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "testing-talk"  # Poetry expects a folder with this name under the root of the repository
+version = "0.1.0"
+description = "Slides for my Python testing talk"
+
+license = "GPL General Public License V3"
+
+authors = [
+    "Eli Boyarski <eli@boyar.ski>"
+]
+
+repository = "https://github.com/eli-b/testing-talk"
+homepage = "https://github.com/eli-b/testing-talk"
+
+# README file(s) are used as the package description
+readme = ["README.md", "LICENSE"]
+
+# Keywords (translated to tags on the package index)
+keywords = ["testing", "talk", "pytest", "hypothesis"]
+
+[tool.poetry.dependencies]
+# Compatible Python versions
+python = ">=3.11,<3.13"
+landslide = "*"
+
+# Dependency groups are supported for organizing your dependencies
+[tool.poetry.group.dev.dependencies]
+black = "*"
+flake8 = "*"
+ipython = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+pytest-cov = "*"
+pytest-timeout = "*"
+hypothesis = {extras = ["pytz"], version = "*"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
