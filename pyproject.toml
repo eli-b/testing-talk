@@ -21,7 +21,7 @@ keywords = ["testing", "talk", "pytest", "hypothesis"]
 [tool.poetry.dependencies]
 # Compatible Python versions
 python = ">=3.11,<3.13"
-landslide = "*"
+landslide = ">=2.0.0"
 
 # Dependency groups are supported for organizing your dependencies
 [tool.poetry.group.dev.dependencies]
