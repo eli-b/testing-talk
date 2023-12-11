@@ -51,29 +51,4 @@ jobs:
       env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  badges:
-    runs-on: ubuntu-latest
-
-    needs: build
-    if: always()  # Run the badges job even if the build job fails - we want the badges to reflect that
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.12
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Set up GitHub Actions Badges
-      run: |
-        echo "[![Build Status](https://github.com/${{ github.repository }}/workflows/Python%20CI/badge.svg)](https://github.com/${{ github.repository }}/actions?query=workflow%3A%22Python+CI%22)" >> README.md
-        echo "[![codecov](https://codecov.io/gh/${{ github.repository }}/main/graph/badge.svg)](https://codecov.io/gh/${{ github.repository }}/main)" >> README.md
-        echo "[![Flake8](https://img.shields.io/badge/flake8-checked-blue)](https://flake8.pycqa.org/en/latest/)" >> README.md
         
