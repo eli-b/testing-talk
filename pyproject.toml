@@ -33,8 +33,13 @@ ipython = "*"
 pytest = "*"
 pytest-cov = "*"
 pytest-timeout = "*"
+pytest-xdist = "*"
 hypothesis = {extras = ["pytz"], version = "*"}
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "-n1 --timeout=1 --timeout-method=thread --hypothesis-profile=suppress"
+timeout_func_only = true
