@@ -53,6 +53,7 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: build
+    if: always()  # Run the badges job even if the build job fails - we want the badges to reflect that
 
     steps:
     - name: Checkout repository
