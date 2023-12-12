@@ -29,6 +29,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f pyproject.toml ]; then pip install pipx; pipx install poetry; poetry install --no-root --without=dev --no-interaction; fi
         
     - name: Lint with flake8
       run: |
@@ -41,7 +42,8 @@ jobs:
         
     - name: Test with pytest
       run: |
-        pytest --cov --cov-report=xml
+        if [ -f requirements.txt ]; then pytest --cov --cov-report=xml; fi
+        if [ -f pyproject.toml ]; then poetry run -- pytest --cov --cov-report=xml; fi
 
     - name: Upload coverage to Codecov.io
       uses: codecov/codecov-action@v3
