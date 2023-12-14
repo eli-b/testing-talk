@@ -81,7 +81,7 @@ def test_pi_digits_bool_input():
 
 
 def test_pi_digits_nominal():
-    """Tests integers within the accepted range"""
+    """Tests with an integer within the accepted range"""
     digits = 50
     ret = example2.pi(digits)
     assert ret == [pi_digits[i : min((i + 40, digits))] for i in range(0, digits, 40)]
@@ -139,7 +139,7 @@ def test_is_prime_bool_input():
 
 
 def test_is_prime_nominal():
-    """Tests integers within the accepted range"""
+    """Test with an integer within the accepted range"""
     n = 31
     ret = example2.is_prime(n)
     assert ret == (n in primes_set)
@@ -200,7 +200,7 @@ def test_prime_bool_input():
 
 
 def test_prime_nominal():
-    """Tests integers within the accepted range"""
+    """Tests with an integer within the accepted range"""
     n = 31
     ret = example2.prime(n)
     assert ret == primes[n - 1]  # n=1 requests the first prime
@@ -261,7 +261,7 @@ def test_fib_bool_input():
 
 
 def test_fib_nominal():
-    """Tests integers within the accepted range"""
+    """Tests with an integer within the accepted range"""
     n = 29
     ret = example2.fibonacci(n)
     assert ret == fibs[n - 1]  # n=1 requests the first prime

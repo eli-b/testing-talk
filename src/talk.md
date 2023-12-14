@@ -281,7 +281,7 @@ Let's test these functions!
 
     !python
     def pi(digits):
-        """Return `digits` digits of pi, in clumps of 40. Only accepts values between 1 and 1000."""
+        """Return `digits` digits of pi, in clumps of 40. Only accepts integers between 1 and 1000."""
 
 
     def is_prime(n):
@@ -289,11 +289,11 @@ Let's test these functions!
 
 
     def prime(n):
-        """Return the n'th (1-based) prime, n between 0 and 1000"""
+        """Return the n'th (1-based) prime, n must be an integer between 0 and 1000"""
 
 
     def fibonacci(n):
-        """Return the n'th (1-based) item in the Fibonacci series, n between 1 and 1000"""
+        """Return the n'th (1-based) item in the Fibonacci series, n must be an integer between 1 and 1000"""
 
 ---
 
