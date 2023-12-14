@@ -282,6 +282,57 @@ TBD
 
 ---
 
+# Mocking
+
+Here's an example of code which is hard to test:
+
+	!python
+	def log(data):
+		try:
+			with open("log", "a") as f:
+				f.write(data)
+            return True
+		except IOError as e: # hard drive full
+			if e.errno == errno.ENOSPC:
+				return False
+                
+---
+
+# Mocking (cont.)
+
+`unittest.mock` is a built-in library that creates "fake" objects with the same interface as another class.
+Mock objects are often used in tests to simulate the external dependencies that the tested code interacts with.
+
+`unittest.mock` also support "Monkey Patching", the process in which we replace objects that the tested code
+interacts with with other objects, often mock objects. In my experience, this is delicate and error-prone.
+
+In my experience, tests that use mock objects tend to be very whitebox-style,
+and are often brittle (break with minor changes to the tested code).
+
+                
+---
+
+# Mocking (cont.)
+
+Here's how we use mocking to test the log example:
+
+    !python
+    import unittest.mock
+    
+    def test_log(self):
+        with unittest.mock.patch('__builtin__.open') as open_func:
+            assert log("foobar") == True
+            open_func.return_value.write.assert_called_with("foobar")
+            
+    def test_log_no_space(self):
+        with unittest.mock.patch('__builtin__.open') as open_func:
+            error = IOError()
+            error.errno = errno.ENOSPC
+            open_func.side_effect = error
+            assert log("foobar") == False
+
+---
+
 # Continuous integration (CI)
 
 - All code hosting solutions can run code automatically when a new commit is pushed
