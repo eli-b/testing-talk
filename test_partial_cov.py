@@ -1,10 +1,11 @@
 def foo(num):
-	num +=5
+    num += 5
 
-	if (num == 300):
-		raise Exception()
+    if num == 300:
+        raise Exception()
 
-	return num - 10
+    return num - 10
+
 
 def test_foo():
-	assert foo(55) == 50
+    assert foo(55) == 50
