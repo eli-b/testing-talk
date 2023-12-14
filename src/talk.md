@@ -277,8 +277,23 @@ To request a fixture, just add its name as a parameter (magic!).
 
 # Exercise 2: Writing tests with Pytest
 
-TBD
+Let's test these functions!
 
+    !python
+    def pi(digits):
+        """Return `digits` digits of pi, in clumps of 40. Only accepts values between 1 and 1000."""
+
+
+    def is_prime(n):
+        """Return whether n is prime, only accepts integers larger than 0."""
+
+
+    def prime(n):
+        """Return the n'th (1-based) prime, n between 0 and 1000"""
+
+
+    def fibonacci(n):
+        """Return the n'th (1-based) item in the Fibonacci series, n between 1 and 1000"""
 
 ---
 
@@ -367,6 +382,32 @@ This helps identify untested code. Ideally, you should aim for maximal code cove
 This is especially true in Python, where there is no compiler to validate your type system.
 
 codecov.io is a service that your CI can send the raw coverage data to and create a cool badge for your project.
+
+---
+
+# A software tester walks into a bar
+
+Runs into a bar.
+Crawls into a bar.
+Dances into a bar.
+Flies into a bar.
+Jumps into a bar.
+
+And orders:
+a beer.
+2 beers.
+0 beers.
+99999999 beers.
+a lizard in a beer glass.
+-1 beer.
+"qwertyuiop" beers.
+
+Testing complete.
+
+A real customer walks into the bar and asks where the bathroom is.
+
+The bar goes up in flames.
+
 
 ---
 
