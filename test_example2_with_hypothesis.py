@@ -1,8 +1,3 @@
-"""Must be run with -n1 (or more), --timeout=1, and --hypothesis-profile=suppress (which I define in the conftest).
-Using xdist is required! This way a single test fails on timeout with the thread timeout method instead crashing the whole pytest run.
-The downside is that the report says that the worker crashed without giving a usable traceback.
-"""
-
 import pytest
 from hypothesis import given, settings, HealthCheck
 from hypothesis.strategies import integers, floats, booleans
