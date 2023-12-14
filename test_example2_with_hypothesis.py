@@ -83,7 +83,7 @@ def test_pi_digits_bool_input(boolean):
 
 
 @pytest.mark.timeout(60)  # We're calling pi 50 times
-@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example's deadline is 1s (see above)
 @given(digits=integers(min_value=3, max_value=990))
 def test_pi_digits_nominal(digits):
     """Tests integers within the accepted range"""
@@ -143,7 +143,7 @@ def test_is_prime_bool_input(b):
 
 
 @pytest.mark.timeout(60)  # We're calling is_prime 50 times
-@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example's deadline is 1s (see above)
 @given(n=integers(min_value=2, max_value=1000000))
 def test_is_prime_nominal(n):
     """Tests integers within the accepted range"""
@@ -206,7 +206,7 @@ def test_prime_bool_input(b):
 
 
 @pytest.mark.timeout(60)  # We're calling prime 50 times
-@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example's deadline is 1s (see above)
 @given(n=integers(min_value=1, max_value=1000))
 def test_prime_nominal(n):
     """Tests integers within the accepted range"""
@@ -269,7 +269,7 @@ def test_fib_bool_input(b):
 
 
 @pytest.mark.timeout(60)  # We're calling fibonacci 50 times
-@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example's deadline is 1s (see above)
 @given(n=integers(min_value=1, max_value=1000))
 def test_fib_nominal(n):
     """Tests integers within the accepted range"""
