@@ -27,7 +27,10 @@ def test_imports_without_an_error():
 
 def test_pi_digits_too_small():
     """Integers smaller than 1 as input should raise an error"""
+    # Arrange
     digits = -5
+
+    # Act + Assert
     with pytest.raises(ValueError):
         ret = example2.pi(digits)
 

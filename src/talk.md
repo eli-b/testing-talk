@@ -232,7 +232,7 @@ How do we verify code that is *supposed* to throw an exception?
     
     def test_divides_by_zero():
         with pytest.raises(ZeroDivisionError):
-            1 / 0
+            divides_by_zero()
 
 Working with floats:
 
@@ -279,9 +279,12 @@ To request a fixture, just add its name as a parameter (magic!).
 
 Let's test these functions!
 
+example2.py:
+
     !python
     def pi(digits):
-        """Return `digits` digits of pi, in clumps of 40. Only accepts integers between 1 and 1000."""
+        """Return `digits` digits of pi, in clumps of 40.
+        Only accepts integers between 1 and 1000."""
 
 
     def is_prime(n):
@@ -289,11 +292,13 @@ Let's test these functions!
 
 
     def prime(n):
-        """Return the n'th (1-based) prime, n must be an integer between 0 and 1000"""
+        """Return the n'th (1-based) prime,
+        n must be an integer between 0 and 1000"""
 
 
     def fibonacci(n):
-        """Return the n'th (1-based) item in the Fibonacci series, n must be an integer between 1 and 1000"""
+        """Return the n'th (1-based) item in the Fibonacci series,
+        n must be an integer between 1 and 1000"""
 
 ---
 
