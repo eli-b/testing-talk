@@ -5,7 +5,7 @@ import numbers
 
 
 def pi(digits):
-    """Return `digits digits of pi`, in clumps of 40"""
+    """Return `digits` digits of pi, in clumps of 40"""
     if (
         not isinstance(digits, numbers.Integral)
         or type(digits) == bool  # bool is required to be interpreted as a bad type
