@@ -41,5 +41,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-addopts = "-n1 --timeout=1 --timeout-method=thread --hypothesis-profile=suppress"
+addopts = "-n1 --timeout=1 --timeout-method=thread"
 timeout_func_only = true
