@@ -10,7 +10,7 @@ from hypothesis.strategies import integers, floats, booleans
 from primes import primes
 from fibs import fibs
 
-import example
+import example2
 
 pi_digits = (
     "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982"
@@ -35,8 +35,8 @@ def test_imports_without_an_error():
 @given(digits=integers(max_value=0))
 def test_pi_digits_too_small(digits, capsys):
     """Integers smaller than 1 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(digits)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(digits)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -45,8 +45,8 @@ def test_pi_digits_too_small(digits, capsys):
 @given(digits=integers(min_value=1001))
 def test_pi_digits_too_large(digits, capsys):
     """Integers larger than 1000 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(digits)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(digits)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -55,8 +55,8 @@ def test_pi_digits_too_large(digits, capsys):
 @given(digits=floats())
 def test_pi_digits_float(digits, capsys):
     """Floats as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(digits)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(digits)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -66,8 +66,8 @@ def test_pi_digits_float(digits, capsys):
 def test_pi_digits_round_float(digits, capsys):
     """Round floats within the accepted range as input should still print an error,
     according to my understanding of the spec"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(float(int(digits)))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(float(int(digits)))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -76,8 +76,8 @@ def test_pi_digits_round_float(digits, capsys):
 @given(digits=integers())
 def test_pi_digits_str_input(digits, capsys):
     """Strings that represent integers as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(
         str(digits)
         # Calling int() on this input would result in an integer,
         # which should either work or give a different exception if given directly
@@ -89,8 +89,8 @@ def test_pi_digits_str_input(digits, capsys):
 
 def test_pi_digits_none(capsys):
     """None as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(None)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(None)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -101,20 +101,20 @@ def test_pi_digits_bool_input(boolean, capsys):
     """True and False are explicitly required to be a wrong input type,
     even though in Python True and False have a numeric value: sum([True for i in range(5)]) == 5
     """
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(boolean)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(boolean)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
 
 
 @pytest.mark.timeout(60)  # We're calling pi 50 times
-@settings(max_examples=50)  # Each example's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
 @given(digits=integers(min_value=3, max_value=990))
 def test_pi_digits_nominal(digits, capsys):
     """Tests integers within the accepted range"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.pi(digits)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.pi(digits)
     captured = capsys.readouterr()
     lines = captured.out.strip().splitlines()
     assert lines == [pi_digits[i : min((i + 40, digits))] for i in range(0, digits, 40)]
@@ -127,8 +127,8 @@ def test_pi_digits_nominal(digits, capsys):
 @given(digits=integers(max_value=0))
 def test_is_prime_too_small(digits, capsys):
     """Integers smaller than 1 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(digits)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(digits)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -137,8 +137,8 @@ def test_is_prime_too_small(digits, capsys):
 @given(f=floats())
 def test_is_prime_float(f, capsys):
     """Floats as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(f)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(f)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -148,8 +148,8 @@ def test_is_prime_float(f, capsys):
 def test_is_prime_round_float(f, capsys):
     """Round floats within the accepted range as input should still print an error,
     according to my understanding of the spec"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(float(int(f)))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(float(int(f)))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -158,8 +158,8 @@ def test_is_prime_round_float(f, capsys):
 @given(n=integers())
 def test_is_prime_str_input(n, capsys):
     """Strings that represent integers as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(
         str(n)
         # Calling int() on this input would result in an integer,
         # which would either work or give a different exception
@@ -171,8 +171,8 @@ def test_is_prime_str_input(n, capsys):
 
 def test_is_prime_input_none(capsys):
     """None as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(None)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(None)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -183,20 +183,20 @@ def test_is_prime_bool_input(b, capsys):
     """True and False are explicitly required to be a wrong input type,
     even though in Python True and False have a numeric value: sum([True for i in range(5)]) == 5
     """
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(b)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(b)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
 
 
 @pytest.mark.timeout(60)  # We're calling is_prime 50 times
-@settings(max_examples=50)  # Each example's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
 @given(n=integers(min_value=2, max_value=1000000))
 def test_is_prime_nominal(n, capsys):
     """Tests integers within the accepted range"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.is_prime(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.is_prime(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == ""
     assert ret == (n in primes_set)
@@ -208,8 +208,8 @@ def test_is_prime_nominal(n, capsys):
 @given(n=integers(max_value=0))
 def test_prime_too_small(n, capsys):
     """Integers smaller than 1 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -218,8 +218,8 @@ def test_prime_too_small(n, capsys):
 @given(n=integers(min_value=1001))
 def test_prime_too_large(n, capsys):
     """Integers larger than 1000 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -228,8 +228,8 @@ def test_prime_too_large(n, capsys):
 @given(f=floats())
 def test_prime_float(f, capsys):
     """Floats as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(f)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(f)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -239,8 +239,8 @@ def test_prime_float(f, capsys):
 def test_prime_round_float(f, capsys):
     """Round floats within the accepted range as input should still print an error,
     according to my understanding of the spec"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(float(int(f)))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(float(int(f)))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -249,8 +249,8 @@ def test_prime_round_float(f, capsys):
 @given(n=integers())
 def test_prime_str_input(n, capsys):
     """Strings that represent integers as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(str(n))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(str(n))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -258,8 +258,8 @@ def test_prime_str_input(n, capsys):
 
 def test_prime_input_none(capsys):
     """None as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(None)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(None)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -270,20 +270,20 @@ def test_prime_bool_input(b, capsys):
     """True and False are explicitly required to be a wrong input type,
     even though in Python True and False have a numeric value: sum([True for i in range(5)]) == 5
     """
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(b)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(b)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
 
 
 @pytest.mark.timeout(60)  # We're calling prime 50 times
-@settings(max_examples=50)  # Each example's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
 @given(n=integers(min_value=1, max_value=1000))
 def test_prime_nominal(n, capsys):
     """Tests integers within the accepted range"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.prime(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.prime(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == ""
     assert ret == primes[n - 1]  # n=1 requests the first prime
@@ -295,8 +295,8 @@ def test_prime_nominal(n, capsys):
 @given(n=integers(max_value=0))
 def test_fib_too_small(n, capsys):
     """Integers smaller than 1 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -305,8 +305,8 @@ def test_fib_too_small(n, capsys):
 @given(n=integers(min_value=1001))
 def test_fib_too_large(n, capsys):
     """Integers larger than 1000 as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Input out of range"
     assert ret is None
@@ -315,8 +315,8 @@ def test_fib_too_large(n, capsys):
 @given(f=floats())
 def test_fib_float(f, capsys):
     """Floats as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(f)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(f)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -326,8 +326,8 @@ def test_fib_float(f, capsys):
 def test_fib_float_round_float(f, capsys):
     """Round floats within the accepted range as input should still print an error,
     according to my understanding of the spec"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(float(int(f)))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(float(int(f)))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -336,8 +336,8 @@ def test_fib_float_round_float(f, capsys):
 @given(n=integers())
 def test_fib_str_input(n, capsys):
     """Strings that represent integers as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(str(n))
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(str(n))
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -345,8 +345,8 @@ def test_fib_str_input(n, capsys):
 
 def test_fib_input_none(capsys):
     """None as input should print an error"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(None)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(None)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
@@ -357,20 +357,20 @@ def test_fib_bool_input(b, capsys):
     """True and False are explicitly required to be a wrong input type,
     even though in Python True and False have a numeric value: sum([True for i in range(5)]) == 5
     """
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(b)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(b)
     captured = capsys.readouterr()
     assert captured.out.strip() == "Wrong input type"
     assert ret is None
 
 
 @pytest.mark.timeout(60)  # We're calling fibonacci 50 times
-@settings(max_examples=50)  # Each example's deadline is 1s (see above)
+@settings(max_examples=50)  # Each example2's deadline is 1s (see above)
 @given(n=integers(min_value=1, max_value=1000))
 def test_fib_nominal(n, capsys):
     """Tests integers within the accepted range"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    ret = example.fibonacci(n)
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    ret = example2.fibonacci(n)
     captured = capsys.readouterr()
     assert captured.out.strip() == ""
     assert ret == fibs[n - 1]  # n=1 requests the first prime
@@ -379,29 +379,29 @@ def test_fib_nominal(n, capsys):
 # ------
 
 
-def test_from_example(capsys):
-    """Tests with the example from the exercise, adapted to not test is_prime with numbers over a million"""
-    _ = capsys.readouterr()  # To get around capsys not being reset between examples
-    example.pi(3.5)
-    example.pi(1001)
-    example.pi(56)
-    example.pi(3)
+def test_from_example2(capsys):
+    """Tests with the example2 from the exercise, adapted to not test is_prime with numbers over a million"""
+    _ = capsys.readouterr()  # To get around capsys not being reset between example2s
+    example2.pi(3.5)
+    example2.pi(1001)
+    example2.pi(56)
+    example2.pi(3)
     print("***********************************************")
-    print(example.is_prime("Yoyoyo"))
-    print(example.is_prime(2.3))
-    print(example.is_prime(0))
-    print(example.is_prime(1000000))
-    print(example.is_prime(2))
+    print(example2.is_prime("Yoyoyo"))
+    print(example2.is_prime(2.3))
+    print(example2.is_prime(0))
+    print(example2.is_prime(1000000))
+    print(example2.is_prime(2))
     print("***********************************************")
-    print(example.prime(True))
-    print(example.prime(-1))
-    print(example.prime(1))
-    print(example.prime(6))
+    print(example2.prime(True))
+    print(example2.prime(-1))
+    print(example2.prime(1))
+    print(example2.prime(6))
     print("***********************************************")
-    print(example.fibonacci("-1"))
-    print(example.fibonacci(0))
-    print(example.fibonacci(1))
-    print(example.fibonacci(13))
+    print(example2.fibonacci("-1"))
+    print(example2.fibonacci(0))
+    print(example2.fibonacci(1))
+    print(example2.fibonacci(13))
     captured = capsys.readouterr()
     assert (
         captured.out.strip()
