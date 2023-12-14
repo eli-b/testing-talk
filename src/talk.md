@@ -1,4 +1,4 @@
-# How do I know if my code even works?
+# How do I even know my code works?
 
 ---
 
