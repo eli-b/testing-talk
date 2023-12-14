@@ -411,12 +411,33 @@ The bar goes up in flames.
 
 ---
 
-# Property-Based Testing
+# Property-Based Testing with Hypothesis
 
+Instead of testing with a few specific examples of data, Property-Based Testing lets you 
+test on all data that matches the required specification.
+
+Hypothesis does three cool things:
+
+- It runs your test with many instances of arbitrary data that matches your spec, e.g. integers between 3 and 1000.
+- It uses established testing practices for choosing the examples: values that are just beyond and just within the bound, very large values, etc.
+- If it finds an example that fails the test, it automatically simplifies it to the simplest and shortest example that still fails the test.
+E.g., if a test failed with a string that 10,000 characters long, Hypothesis can report find and report the shortest string that still failed the test,
+which may be only 10 characters long and would be much nicer to debug.
 
 It's how I write tests.
 
+---
 
+# Hypothesis demo
+
+From test_example2_with_hypothesis.py:
+
+    !python
+    @given(n=integers(min_value=2, max_value=1000000))
+    def test_is_prime_nominal(n):
+        """Tests integers within the accepted range"""
+        ret = example2.is_prime(n)
+        assert ret == (n in primes_set)
 
 ---
 
